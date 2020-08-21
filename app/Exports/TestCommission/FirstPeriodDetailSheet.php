@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\QueryCollection;
+use App\Commission\FirstYearCommission;
 
 class FirstPeriodDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
@@ -21,8 +21,8 @@ class FirstPeriodDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize,
 
     public function collection()
     {
-        $QueryCollection = new QueryCollection;
-        $data = $QueryCollection->firstPeriodDetail($this->period, $this->manCode);
+        $QueryCollection = new FirstYearCommission;
+        $data = $QueryCollection->detail($this->period, $this->manCode);
         
         return $data;
     }

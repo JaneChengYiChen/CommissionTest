@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\QueryCollection;
+use App\Commission\FirstYearCommission;
 
 class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
@@ -21,8 +21,8 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
 
     public function collection()
     {
-        $QueryCollection = new QueryCollection;
-        $data = $QueryCollection->firstPeriodSum($this->period, $this->manCode);
+        $QueryCollection = new FirstYearCommission;
+        $data = $QueryCollection->sum($this->period, $this->manCode);
         
         return $data;
     }
