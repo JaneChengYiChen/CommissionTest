@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
 use App\Commission\QueryCollection;
 
-class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class FirstPeriodDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -22,7 +22,7 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
     public function collection()
     {
         $QueryCollection = new QueryCollection;
-        $data = $QueryCollection->firstPeriodSum($this->period, $this->manCode);
+        $data = $QueryCollection->firstPeriodDetail($this->period, $this->manCode);
         
         return $data;
     }
@@ -31,11 +31,14 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
     {
         return [
             [
-                '人員編號',
-                '人員姓名',
-                '直接佣金月份',
-                '直接佣金',
-                '組織佣金'
+                '領佣人編號',
+                '領佣人姓名',
+                '月份',
+                '來源人員編號',
+                '來源人員姓名',
+                '來源佣金',
+                '領佣人可得比率',
+                '領佣人可得佣金'
             ],
         ];
     }
@@ -46,7 +49,7 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
      */
     public function title(): string
     {
-        return '首年佣金總和';
+        return '首年佣金明細';
     }
 
     /**
@@ -57,21 +60,14 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
     {
 
         return [
-            $table->man_code,
-            $table->man_name,
-            $this::getPeriod($table->direct_period, $table->or_period),
-            $table->direct_fyb,
-            $table->or_fyc,
+            $table->gdcode,
+            $table->gdname,
+            $table->period,
+            $table->Man_Code,
+            $table->sales_name,
+            $table->fyb,
+            $table->FYRateDiff,
+            $table->gainFromOrg
         ];
-    }
-
-    private function getPeriod($direct_period, $or_period)
-    {
-        $period = $direct_period;
-        if (is_null($direct_period)) {
-            $period = $or_period;
-        }
-
-        return $period;
     }
 }

@@ -41,11 +41,7 @@ class StCommision extends Command
     public function handle()
     {
         $fileName = 'st_commission.xlsx';
-        Excel::store(new TestCommissionDataExport(202001, 123), $fileName, 'tmp');
-        echo 'success';
-        exit;
-        $FirstYearCommission = new FirstYearCommission;
-        $FirstYearCommission->main();
-        return 0;
+        Excel::store(new TestCommissionDataExport(), $fileName, 'tmp');
+        echo 'scuess!';
     }
 }
