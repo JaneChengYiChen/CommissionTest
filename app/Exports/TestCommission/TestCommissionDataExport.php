@@ -12,7 +12,8 @@ class TestCommissionDataExport implements WithMultipleSheets
     protected $period;
     protected static $sheets = [
         'FirstPeriodSumSheet' => "App\Exports\TestCommission\FirstPeriodSumSheet",
-        'FirstPeriodDetailSheet' => "App\Exports\TestCommission\FirstPeriodDetailSheet"
+        'FirstPeriodDetailSheet' => "App\Exports\TestCommission\FirstPeriodDetailSheet",
+        'DevelopSumSheet' => "App\Exports\TestCommission\DevelopSumSheet",
     ];
 
     public function __construct($period = null, $manCode = null)
