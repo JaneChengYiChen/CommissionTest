@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Commission\FirstYearCommission;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TestCommission\TestCommissionDataExport;
+use Mail;
 
 class StCommision extends Command
 {
@@ -14,7 +15,7 @@ class StCommision extends Command
      *
      * @var string
      */
-    protected $signature = 'st:commission';
+    protected $signature = 'st:commission {--period=null} {--mancode=null}';
 
     /**
      * The console command description.
@@ -40,7 +41,49 @@ class StCommision extends Command
      */
     public function handle()
     {
-        $fileName = 'st_commission.xlsx';
-        Excel::store(new TestCommissionDataExport(), $fileName, 'tmp');
+        $this->period = ($this->option('period') == 'null')? null : $this->option('period');
+        $this->mancode = ($this->option('mancode') == 'null')? null : $this->option('mancode');
+
+        $this->attachment();
+        $this->mailing();
+        $this->unlinkFilePath();
+    }
+
+    private function attachment()
+    {
+        $fileName = "st_commission.xlsx";
+        $fileNameZip = "st_commission.zip";
+
+        ini_set("memory_limit", -1);
+        Excel::store(new TestCommissionDataExport($this->period, $this->mancode), $fileName, 'tmp');
+        
+        $this->pathToFile = "/tmp/" . $fileName;
+        $this->zip_path = "/tmp/" . $fileNameZip;
+        $password = env("ST_COMMISSION");
+        system("zip -P {$password} {$this->zip_path} {$this->pathToFile}");
+    }
+
+    private function mailing()
+    {
+        $content = "Dear all, 
+        佣金如附件";
+
+        $zip_path = $this->zip_path;
+        Mail::raw($content, function ($message) use ($zip_path) {
+            $message->to(env("ST_COMMISSION_To"))
+                ->cc(env("ST_COMMISSION_CC"))
+                ->subject('st_佣金')
+                ->attach($zip_path);
+        });
+    }
+
+    private function unlinkFilePath()
+    {
+        if (file_exists($this->zip_path)) {
+            unlink($this->zip_path);
+        }
+        if (file_exists($this->pathToFile)) {
+            unlink($this->pathToFile);
+        }
     }
 }
