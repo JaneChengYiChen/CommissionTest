@@ -31,11 +31,10 @@ class DevelopSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCo
     {
         return [
             [
-                '人員編號',
-                '人員姓名',
-                '佣金',
-                '直展佣金比率',
-                '直展佣金月份'
+                '月份',
+                '領佣人員編號',
+                '領佣人員姓名',
+                '領佣人直展佣金',
             ],
         ];
     }
@@ -57,11 +56,10 @@ class DevelopSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCo
     {
 
         return [
+            $table->period,
             $table->man_code,
             $table->man_name,
-            $table->fyb,
-            $table->straight_fyc,
-            $table->period,
+            $table->straight_fyc
         ];
     }
 }

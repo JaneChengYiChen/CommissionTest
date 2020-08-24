@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\FirstYearCommission;
+use App\Commission\YearEndBonusCommission;
 
-class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class YearEndBonusSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -21,7 +21,7 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
 
     public function collection()
     {
-        $QueryCollection = new FirstYearCommission;
+        $QueryCollection = new YearEndBonusCommission;
         $data = $QueryCollection->sum($this->period, $this->manCode);
         
         return $data;
@@ -30,13 +30,11 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
     public function headings(): array
     {
         return [
-            [
-                '月份',
-                '人員編號',
-                '人員姓名',
-                '直接佣金',
-                '組織佣金'
-            ],
+            '年終獎金月份',
+            '人員編號',
+            '人員姓名',
+            '直接佣金',
+            '組織佣金'
         ];
     }
 
@@ -46,7 +44,7 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
      */
     public function title(): string
     {
-        return '首年佣金總和';
+        return '年終獎金總和';
     }
 
     /**
@@ -60,8 +58,8 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
             $this::getPeriod($table->direct_period, $table->or_period),
             $table->man_code,
             $table->man_name,
-            $table->direct_fyc,
-            $table->or_fyc,
+            $table->year_end_bonus,
+            $table->or_year_end_bonus,
         ];
     }
 

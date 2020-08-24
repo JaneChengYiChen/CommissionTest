@@ -31,9 +31,9 @@ class FirstPeriodDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize,
     {
         return [
             [
+                '月份',
                 '領佣人編號',
                 '領佣人姓名',
-                '月份',
                 '來源人員編號',
                 '來源人員姓名',
                 '來源佣金',
@@ -60,9 +60,9 @@ class FirstPeriodDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize,
     {
 
         return [
+            $table->period,
             $table->gdcode,
             $table->gdname,
-            $table->period,
             $table->Man_Code,
             $table->sales_name,
             $table->fyb,

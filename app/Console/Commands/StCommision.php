@@ -42,6 +42,5 @@ class StCommision extends Command
     {
         $fileName = 'st_commission.xlsx';
         Excel::store(new TestCommissionDataExport(), $fileName, 'tmp');
-        echo 'scuess!';
     }
 }
