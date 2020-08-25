@@ -11,8 +11,12 @@ class TestCommissionDataExport implements WithMultipleSheets
 
     protected $period;
     protected static $sheets = [
+        'MentoringRatioSheet' => "App\Exports\TestCommission\MentoringRatioSheet",
+        'MentoringPropertyRatioSheet' => "App\Exports\TestCommission\MentoringPropertyRatioSheet",
         'FirstPeriodSumSheet' => "App\Exports\TestCommission\FirstPeriodSumSheet",
         'FirstPeriodDetailSheet' => "App\Exports\TestCommission\FirstPeriodDetailSheet",
+        'FirstPeriodPropertySumSheet' => "App\Exports\TestCommission\FirstPeriodPropertySumSheet",
+        'FirstPeriodPropertyDetailSheet' => "App\Exports\TestCommission\FirstPeriodPropertyDetailSheet",
         'DevelopSumSheet' => "App\Exports\TestCommission\DevelopSumSheet",
         'YearEndBonusSumSheet' => "App\Exports\TestCommission\YearEndBonusSumSheet",
         'YearEndBonusDetailSheet' => "App\Exports\TestCommission\YearEndBonusDetailSheet",

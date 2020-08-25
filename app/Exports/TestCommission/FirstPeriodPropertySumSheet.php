@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\FirstYearCommission;
+use App\Commission\FirstYearPropertyCommission;
 
-class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class FirstPeriodPropertySumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -21,7 +21,7 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
 
     public function collection()
     {
-        $QueryCollection = new FirstYearCommission;
+        $QueryCollection = new FirstYearPropertyCommission;
         $data = $QueryCollection->sum($this->period, $this->manCode);
         
         return $data;
@@ -46,7 +46,7 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
      */
     public function title(): string
     {
-        return '首年佣金總和(排除產險)';
+        return '首年佣金總和(產險)';
     }
 
     /**

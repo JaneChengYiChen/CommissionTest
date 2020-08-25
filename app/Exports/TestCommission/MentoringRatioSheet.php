@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\FirstYearCommission;
+use App\Commission\RatioCommission;
 
-class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class MentoringRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -21,8 +21,8 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
 
     public function collection()
     {
-        $QueryCollection = new FirstYearCommission;
-        $data = $QueryCollection->sum($this->period, $this->manCode);
+        $QueryCollection = new RatioCommission;
+        $data = $QueryCollection->mentoringRatio($this->manCode);
         
         return $data;
     }
@@ -31,11 +31,14 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
     {
         return [
             [
-                '月份',
-                '人員編號',
-                '人員姓名',
-                '直接佣金',
-                '組織佣金'
+                '原始人員編號',
+                '原始人員姓名',
+                '原始人員K值',
+                '上層人員編號',
+                '上層人員姓名',
+                '上幾層',
+                '上層人員K值',
+                '上層人員可從原始人員拿到%數'
             ],
         ];
     }
@@ -46,7 +49,7 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
      */
     public function title(): string
     {
-        return '首年佣金總和(排除產險)';
+        return '輔導線關係圖(排除產險)';
     }
 
     /**
@@ -57,21 +60,19 @@ class FirstPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
     {
 
         return [
-            $this::getPeriod($table->direct_period, $table->or_period),
             $table->man_code,
             $table->man_name,
-            $table->direct_fyc,
-            $table->or_fyc,
+            $table->man_rate,
+            $table->GDCode,
+            $table->gdname,
+            $table->LV,
+            $table->FYRate,
+            $table->FYRateDiff,
         ];
     }
 
-    private function getPeriod($direct_period, $or_period)
+    private function rate($rate)
     {
-        $period = $direct_period;
-        if (is_null($direct_period)) {
-            $period = $or_period;
-        }
-
-        return $period;
+        return round($rate/100, 2);
     }
 }

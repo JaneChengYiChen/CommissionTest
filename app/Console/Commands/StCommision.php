@@ -66,7 +66,20 @@ class StCommision extends Command
     private function mailing()
     {
         $content = "Dear all, 
-        佣金如附件";
+        佣金如附件
+
+        首期佣金(排除產險)：
+          -- ct = 1
+          -- BCode = 499
+        首期佣金(產險)：
+          -- ct = 1
+          -- BCode = 1160, 5343
+        直展獎金：
+          -- ct = 1
+          -- BCode = 499
+        年終獎金：
+          -- ct = 70
+          -- BCode = 1746";
 
         $zip_path = $this->zip_path;
         Mail::raw($content, function ($message) use ($zip_path) {

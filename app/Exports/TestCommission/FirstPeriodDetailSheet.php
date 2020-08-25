@@ -49,7 +49,7 @@ class FirstPeriodDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize,
      */
     public function title(): string
     {
-        return '首年佣金明細';
+        return '首年佣金明細(排除產險)';
     }
 
     /**
