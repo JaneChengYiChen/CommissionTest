@@ -57,4 +57,27 @@ class RatioCommission
 
         return $description->get();
     }
+
+    public function recommendationRatio($manCode)
+    {
+        $description = $this->core
+        ->table('v_recommendation_ratio')
+        ->select(
+            'man_code',
+            'man_name',
+            'man_title',
+            'GDCode',
+            'gdname',
+            'LV',
+            'gdTitle',
+            'or_rate'
+        );
+
+        ### 目前驗證中：先全部開放
+        // if (!is_null($manCode)) {
+        //     $description->where('GDCode', $manCode);
+        // }
+
+        return $description->get();
+    }
 }

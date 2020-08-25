@@ -13,6 +13,7 @@ class TestCommissionDataExport implements WithMultipleSheets
     protected static $sheets = [
         'MentoringRatioSheet' => "App\Exports\TestCommission\MentoringRatioSheet",
         'MentoringPropertyRatioSheet' => "App\Exports\TestCommission\MentoringPropertyRatioSheet",
+        'RecommendationRatioSheet' => "App\Exports\TestCommission\RecommendationRatioSheet",
         'FirstPeriodSumSheet' => "App\Exports\TestCommission\FirstPeriodSumSheet",
         'FirstPeriodDetailSheet' => "App\Exports\TestCommission\FirstPeriodDetailSheet",
         'FirstPeriodPropertySumSheet' => "App\Exports\TestCommission\FirstPeriodPropertySumSheet",
@@ -20,6 +21,8 @@ class TestCommissionDataExport implements WithMultipleSheets
         'DevelopSumSheet' => "App\Exports\TestCommission\DevelopSumSheet",
         'YearEndBonusSumSheet' => "App\Exports\TestCommission\YearEndBonusSumSheet",
         'YearEndBonusDetailSheet' => "App\Exports\TestCommission\YearEndBonusDetailSheet",
+        'SystemSumSheet' => "App\Exports\TestCommission\SystemSumSheet",
+        'SystemDetailSheet' => "App\Exports\TestCommission\SystemDetailSheet",
     ];
 
     public function __construct($period = null, $manCode = null)
