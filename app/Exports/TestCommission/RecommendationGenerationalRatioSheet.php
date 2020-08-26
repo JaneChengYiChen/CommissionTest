@@ -10,7 +10,12 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
 use App\Commission\RatioCommission;
 
-class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class RecommendationGenerationalRatioSheet implements
+    WithTitle,
+    WithHeadings,
+    ShouldAutoSize,
+    FromCollection,
+    WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -22,7 +27,7 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
     public function collection()
     {
         $QueryCollection = new RatioCommission;
-        $data = $QueryCollection->recommendationRatio($this->manCode);
+        $data = $QueryCollection->recommendationGenerationRatio($this->manCode);
         
         return $data;
     }
@@ -49,7 +54,7 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
      */
     public function title(): string
     {
-        return '推薦線關係圖(系統佣金)';
+        return '推薦線關係圖(代數獎金)';
     }
 
     /**

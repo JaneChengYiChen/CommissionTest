@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\RatioCommission;
+use App\Commission\GenerationCommission;
 
-class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class GenerationSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -21,8 +21,8 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
 
     public function collection()
     {
-        $QueryCollection = new RatioCommission;
-        $data = $QueryCollection->recommendationRatio($this->manCode);
+        $QueryCollection = new GenerationCommission;
+        $data = $QueryCollection->sum($this->period, $this->manCode);
         
         return $data;
     }
@@ -31,14 +31,10 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
     {
         return [
             [
-                '原始人員編號',
-                '原始人員姓名',
-                '原始人員職級',
-                '上層人員編號',
-                '上層人員姓名',
-                '上幾層',
-                '上層人員職級',
-                '上層人員可從原始人員拿到%數'
+                '月份',
+                '人員編號',
+                '人員姓名',
+                '組織佣金'
             ],
         ];
     }
@@ -49,7 +45,7 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
      */
     public function title(): string
     {
-        return '推薦線關係圖(系統佣金)';
+        return '代數佣金總和';
     }
 
     /**
@@ -60,14 +56,10 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
     {
 
         return [
-            $table->man_code,
-            $table->man_name,
-            $table->man_title,
-            $table->GDCode,
+            $table->or_period,
+            $table->gdcode,
             $table->gdname,
-            $table->LV,
-            $table->gdTitle,
-            $table->or_rate,
+            $table->or_fyc,
         ];
     }
 }

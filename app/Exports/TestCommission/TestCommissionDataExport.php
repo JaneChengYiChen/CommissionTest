@@ -14,6 +14,7 @@ class TestCommissionDataExport implements WithMultipleSheets
         'MentoringRatioSheet' => "App\Exports\TestCommission\MentoringRatioSheet",
         'MentoringPropertyRatioSheet' => "App\Exports\TestCommission\MentoringPropertyRatioSheet",
         'RecommendationRatioSheet' => "App\Exports\TestCommission\RecommendationRatioSheet",
+        'RecommendationGenerationalRatioSheet' => "App\Exports\TestCommission\RecommendationGenerationalRatioSheet",
         'FirstPeriodSumSheet' => "App\Exports\TestCommission\FirstPeriodSumSheet",
         'FirstPeriodDetailSheet' => "App\Exports\TestCommission\FirstPeriodDetailSheet",
         'FirstPeriodPropertySumSheet' => "App\Exports\TestCommission\FirstPeriodPropertySumSheet",
@@ -23,6 +24,8 @@ class TestCommissionDataExport implements WithMultipleSheets
         'YearEndBonusDetailSheet' => "App\Exports\TestCommission\YearEndBonusDetailSheet",
         'SystemSumSheet' => "App\Exports\TestCommission\SystemSumSheet",
         'SystemDetailSheet' => "App\Exports\TestCommission\SystemDetailSheet",
+        'GenerationSumSheet' => "App\Exports\TestCommission\GenerationSumSheet",
+        'GenerationDetailSheet' => "App\Exports\TestCommission\GenerationDetailSheet",
     ];
 
     public function __construct($period = null, $manCode = null)

@@ -82,13 +82,16 @@ class StCommision extends Command
           -- BCode = 1746
         系統獎金：
           -- ct = 1
+          -- BCode = 499
+        代數獎金：
+          -- ct = 1
           -- BCode = 499";
 
         $zip_path = $this->zip_path;
         Mail::raw($content, function ($message) use ($zip_path) {
             $message->to(env("ST_COMMISSION_To"))
                 ->cc(env("ST_COMMISSION_CC"))
-                ->subject('st_佣金#此封加入系統獎金')
+                ->subject('st_佣金#此封加入代數獎金')
                 ->attach($zip_path);
         });
     }
