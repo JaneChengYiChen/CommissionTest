@@ -14,7 +14,7 @@ class DevelopCommission
     public function sum($period, $manCode)
     {
         $description = $this->core
-        ->table('v_develop_commission')
+        ->table('v_develop_commissions')
         ->select(
             'man_code',
             'man_name',

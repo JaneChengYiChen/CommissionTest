@@ -61,13 +61,13 @@ class GenerationDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize, 
 
         return [
             $table->period,
-            $table->gdcode,
-            $table->gdname,
-            $table->Man_Code,
+            $table->gd_code,
+            $table->gd_name,
+            $table->sales_code,
             $table->sales_name,
             $table->fyb,
-            $table->or_rate,
-            $table->gainFromOrg
+            $table->gd_get_rate,
+            $table->gd_gain_from_sales
         ];
     }
 }

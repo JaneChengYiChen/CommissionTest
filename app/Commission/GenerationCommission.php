@@ -14,10 +14,10 @@ class GenerationCommission
     public function sum($period, $manCode)
     {
         $description = $this->core
-        ->table('v_generation_commission')
+        ->table('v_generation_commissions')
         ->select(
-            'gdcode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'or_fyc',
             'or_period'
         );
@@ -27,7 +27,7 @@ class GenerationCommission
         }
 
         if (!is_null($manCode)) {
-            $description->where('gdcode', $manCode);
+            $description->where('gd_code', $manCode);
         }
 
         return $description->get();
@@ -38,14 +38,14 @@ class GenerationCommission
         $description = $this->core
         ->table('v_generation_commission_details')
         ->select(
-            'gdcode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'period',
-            'Man_Code',
+            'sales_code',
             'sales_name',
             'fyb',
-            'or_rate',
-            'gainFromOrg'
+            'gd_get_rate',
+            'gd_gain_from_sales'
         );
         
         if (!is_null($period)) {
@@ -53,7 +53,7 @@ class GenerationCommission
         }
 
         if (!is_null($manCode)) {
-            $description->where('gdcode', $manCode);
+            $description->where('gd_code', $manCode);
         }
 
         return $description->get();

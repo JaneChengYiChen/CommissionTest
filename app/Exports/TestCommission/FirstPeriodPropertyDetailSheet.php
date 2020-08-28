@@ -61,13 +61,13 @@ class FirstPeriodPropertyDetailSheet implements WithTitle, WithHeadings, ShouldA
 
         return [
             $table->period,
-            $table->gdcode,
-            $table->gdname,
-            $table->Man_Code,
+            $table->gd_code,
+            $table->gd_name,
+            $table->sales_code,
             $table->sales_name,
             $table->fyb,
-            $table->FYRateDiff,
-            $table->gainFromOrg
+            $table->gd_get_rate,
+            $table->gd_gain_from_sales
         ];
     }
 }

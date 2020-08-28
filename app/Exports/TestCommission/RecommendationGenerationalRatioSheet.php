@@ -68,11 +68,11 @@ class RecommendationGenerationalRatioSheet implements
             $table->man_code,
             $table->man_name,
             $table->man_title,
-            $table->GDCode,
-            $table->gdname,
+            $table->gd_code,
+            $table->gd_name,
             $table->LV,
-            $table->gdTitle,
-            $table->or_rate,
+            $table->gd_title,
+            $table->gd_get_rate,
         ];
     }
 }

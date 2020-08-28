@@ -14,16 +14,16 @@ class RatioCommission
     public function mentoringRatio($manCode)
     {
         $description = $this->core
-        ->table('v_mentoring_ratio')
+        ->table('v_mentoring_ratios')
         ->select(
             'man_code',
             'man_name',
             'man_rate',
-            'GDCode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'LV',
-            'FYRate',
-            'FYRateDiff'
+            'gd_rate',
+            'gd_get_rate'
         );
 
         ### 目前驗證中：先全部開放
@@ -37,17 +37,17 @@ class RatioCommission
     public function mentoringPropertyRatio($manCode)
     {
         $description = $this->core
-        ->table('v_property_insurance_mentoring_ratio')
+        ->table('v_property_insurance_mentoring_ratios')
         ->select(
             'man_code',
             'man_name',
             'man_title',
             'self_rate',
-            'GDCode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'LV',
-            'gdTitle',
-            'or_rate'
+            'gd_title',
+            'gd_get_rate'
         );
 
         ### 目前驗證中：先全部開放
@@ -61,16 +61,16 @@ class RatioCommission
     public function recommendationRatio($manCode)
     {
         $description = $this->core
-        ->table('v_recommendation_ratio')
+        ->table('v_recommendation_ratios')
         ->select(
             'man_code',
             'man_name',
             'man_title',
-            'GDCode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'LV',
-            'gdTitle',
-            'or_rate'
+            'gd_title',
+            'gd_get_rate'
         );
 
         ### 目前驗證中：先全部開放
@@ -84,16 +84,16 @@ class RatioCommission
     public function recommendationGenerationRatio($manCode)
     {
         $description = $this->core
-        ->table('v_recommendation_generation_ratio')
+        ->table('v_recommendation_generation_ratios')
         ->select(
             'man_code',
             'man_name',
             'man_title',
-            'GDCode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'LV',
-            'gdTitle',
-            'or_rate'
+            'gd_title',
+            'gd_get_rate'
         );
 
         ### 目前驗證中：先全部開放

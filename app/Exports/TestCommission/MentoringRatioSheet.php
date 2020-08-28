@@ -63,11 +63,11 @@ class MentoringRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fr
             $table->man_code,
             $table->man_name,
             $table->man_rate,
-            $table->GDCode,
-            $table->gdname,
+            $table->gd_code,
+            $table->gd_name,
             $table->LV,
-            $table->FYRate,
-            $table->FYRateDiff,
+            $table->gd_rate,
+            $table->gd_get_rate,
         ];
     }
 

@@ -49,6 +49,12 @@ class StCommision extends Command
         $this->unlinkFilePath();
     }
 
+    protected function progressBarIni()
+    {
+        $this->progressBar = $this->output->createProgressBar(4);
+        $this->progressBar->start();
+    }
+
     private function attachment()
     {
         $fileName = "st_commission.xlsx";
@@ -91,7 +97,7 @@ class StCommision extends Command
         Mail::raw($content, function ($message) use ($zip_path) {
             $message->to(env("ST_COMMISSION_To"))
                 ->cc(env("ST_COMMISSION_CC"))
-                ->subject('st_佣金#此封加入代數獎金')
+                ->subject('st_佣金#此封調整排除產險的標準')
                 ->attach($zip_path);
         });
     }

@@ -14,7 +14,7 @@ class YearEndBonusCommission
     public function sum($period, $manCode)
     {
         $description = $this->core
-        ->table('v_year_end_bonus_commission')
+        ->table('v_year_end_bonus_commissions')
         ->select(
             'man_code',
             'man_name',
@@ -45,14 +45,14 @@ class YearEndBonusCommission
         $description = $this->core
         ->table('v_year_end_bonus_commission_details')
         ->select(
-            'gdcode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'period',
-            'Man_Code',
+            'sales_code',
             'sales_name',
             'fyb',
-            'FYRateDiff',
-            'year_end_bonus_or'
+            'gd_get_rate',
+            'gd_gain_from_sales'
         );
         
         if (!is_null($period)) {
@@ -60,7 +60,7 @@ class YearEndBonusCommission
         }
 
         if (!is_null($manCode)) {
-            $description->where('gdcode', $manCode);
+            $description->where('gd_code', $manCode);
         }
 
         return $description->get();

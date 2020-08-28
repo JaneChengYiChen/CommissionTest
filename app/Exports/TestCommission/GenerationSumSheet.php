@@ -57,8 +57,8 @@ class GenerationSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, Fro
 
         return [
             $table->or_period,
-            $table->gdcode,
-            $table->gdname,
+            $table->gd_code,
+            $table->gd_name,
             $table->or_fyc,
         ];
     }

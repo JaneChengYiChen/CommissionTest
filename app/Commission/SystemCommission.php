@@ -14,7 +14,7 @@ class SystemCommission
     public function sum($period, $manCode)
     {
         $description = $this->core
-        ->table('v_system_commission')
+        ->table('v_system_commissions')
         ->select(
             'man_code',
             'man_name',
@@ -45,14 +45,14 @@ class SystemCommission
         $description = $this->core
         ->table('v_system_commission_details')
         ->select(
-            'gdcode',
-            'gdname',
+            'gd_code',
+            'gd_name',
             'period',
-            'Man_Code',
+            'sales_code',
             'sales_name',
             'fyb',
-            'or_rate',
-            'gainFromOrg'
+            'gd_get_rate',
+            'gd_gain_from_sales'
         );
         
         if (!is_null($period)) {
@@ -60,7 +60,7 @@ class SystemCommission
         }
 
         if (!is_null($manCode)) {
-            $description->where('gdcode', $manCode);
+            $description->where('gd_code', $manCode);
         }
 
         return $description->get();
