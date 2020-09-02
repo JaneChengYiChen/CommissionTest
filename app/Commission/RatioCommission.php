@@ -103,4 +103,50 @@ class RatioCommission
 
         return $description->get();
     }
+
+    public function secondYearRatio($manCode)
+    {
+        $description = $this->core
+        ->table('v_mentoring_second_year_ratios')
+        ->select(
+            'man_code',
+            'man_name',
+            'man_rate',
+            'gd_code',
+            'gd_name',
+            'LV',
+            'gd_rate',
+            'gd_get_rate'
+        );
+
+        ### 目前驗證中：先全部開放
+        // if (!is_null($manCode)) {
+        //     $description->where('GDCode', $manCode);
+        // }
+
+        return $description->get();
+    }
+
+    public function continuedRatio($manCode)
+    {
+        $description = $this->core
+        ->table('v_mentoring_continued_ratios')
+        ->select(
+            'man_code',
+            'man_name',
+            'man_rate',
+            'gd_code',
+            'gd_name',
+            'LV',
+            'gd_rate',
+            'gd_get_rate'
+        );
+
+        ### 目前驗證中：先全部開放
+        // if (!is_null($manCode)) {
+        //     $description->where('GDCode', $manCode);
+        // }
+
+        return $description->get();
+    }
 }

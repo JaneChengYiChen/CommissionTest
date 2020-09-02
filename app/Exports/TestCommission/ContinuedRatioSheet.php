@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\SystemCommission;
+use App\Commission\RatioCommission;
 
-class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class ContinuedRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -21,8 +21,8 @@ class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCol
 
     public function collection()
     {
-        $QueryCollection = new SystemCommission;
-        $data = $QueryCollection->sum($this->period, $this->manCode);
+        $QueryCollection = new RatioCommission;
+        $data = $QueryCollection->continuedRatio($this->manCode);
         
         return $data;
     }
@@ -31,11 +31,14 @@ class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCol
     {
         return [
             [
-                '月份',
-                '人員編號',
-                '人員姓名',
-                '直接佣金',
-                '組織佣金'
+                '原始人員編號',
+                '原始人員姓名',
+                '原始人員K值',
+                '上層人員編號',
+                '上層人員姓名',
+                '上幾層',
+                '上層人員K值',
+                '上層人員可從原始人員拿到%數'
             ],
         ];
     }
@@ -46,7 +49,7 @@ class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCol
      */
     public function title(): string
     {
-        return '系統佣金總和(首佣)';
+        return '輔導線關係圖(繼續率)';
     }
 
     /**
@@ -57,21 +60,14 @@ class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCol
     {
 
         return [
-            $this::getPeriod($table->direct_period, $table->or_period),
             $table->man_code,
             $table->man_name,
-            $table->direct_fyc,
-            $table->or_fyc,
+            $table->man_rate,
+            $table->gd_code,
+            $table->gd_name,
+            $table->LV,
+            $table->gd_rate,
+            $table->gd_get_rate,
         ];
-    }
-
-    private function getPeriod($direct_period, $or_period)
-    {
-        $period = $direct_period;
-        if (is_null($direct_period)) {
-            $period = $or_period;
-        }
-
-        return $period;
     }
 }

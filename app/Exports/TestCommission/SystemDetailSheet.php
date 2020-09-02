@@ -49,7 +49,7 @@ class SystemDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize, From
      */
     public function title(): string
     {
-        return '系統佣金明細';
+        return '系統佣金明細(首佣)';
     }
 
     /**

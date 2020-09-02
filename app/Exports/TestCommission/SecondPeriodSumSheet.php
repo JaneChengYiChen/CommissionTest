@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\SystemCommission;
+use App\Commission\SecondYearCommission;
 
-class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class SecondPeriodSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode)
@@ -21,7 +21,7 @@ class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCol
 
     public function collection()
     {
-        $QueryCollection = new SystemCommission;
+        $QueryCollection = new SecondYearCommission;
         $data = $QueryCollection->sum($this->period, $this->manCode);
         
         return $data;
@@ -46,7 +46,7 @@ class SystemSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCol
      */
     public function title(): string
     {
-        return '系統佣金總和(首佣)';
+        return '續年佣金總和';
     }
 
     /**

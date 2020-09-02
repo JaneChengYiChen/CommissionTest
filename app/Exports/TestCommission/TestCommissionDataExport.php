@@ -13,6 +13,8 @@ class TestCommissionDataExport implements WithMultipleSheets
     protected static $sheets = [
         'MentoringRatioSheet' => "App\Exports\TestCommission\MentoringRatioSheet",
         'MentoringPropertyRatioSheet' => "App\Exports\TestCommission\MentoringPropertyRatioSheet",
+        'MentoringSecondPeriodRatioSheet' => "App\Exports\TestCommission\SecondPeriodRatioSheet",
+        'MentoringContinuedRatioSheet' => "App\Exports\TestCommission\ContinuedRatioSheet",
         'RecommendationRatioSheet' => "App\Exports\TestCommission\RecommendationRatioSheet",
         'RecommendationGenerationalRatioSheet' => "App\Exports\TestCommission\RecommendationGenerationalRatioSheet",
         'FirstPeriodSumSheet' => "App\Exports\TestCommission\FirstPeriodSumSheet",
@@ -22,6 +24,10 @@ class TestCommissionDataExport implements WithMultipleSheets
         'DevelopSumSheet' => "App\Exports\TestCommission\DevelopSumSheet",
         'YearEndBonusSumSheet' => "App\Exports\TestCommission\YearEndBonusSumSheet",
         'YearEndBonusDetailSheet' => "App\Exports\TestCommission\YearEndBonusDetailSheet",
+        'SecondPeriodSumSheet' => "App\Exports\TestCommission\SecondPeriodSumSheet",
+        'SecondPeriodDetailSheet' => "App\Exports\TestCommission\SecondPeriodDetailSheet",
+        'ContinuedSumSheet' => "App\Exports\TestCommission\ContinuedSumSheet",
+        'ContinuedDetailSheet' => "App\Exports\TestCommission\ContinuedDetailSheet",
         'SystemSumSheet' => "App\Exports\TestCommission\SystemSumSheet",
         'SystemDetailSheet' => "App\Exports\TestCommission\SystemDetailSheet",
         'GenerationSumSheet' => "App\Exports\TestCommission\GenerationSumSheet",
@@ -40,8 +46,6 @@ class TestCommissionDataExport implements WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [];
-
-        $sheetlist = [];
 
         foreach (self::$sheets as $sheetClass) {
             $sheets[] = new $sheetClass($this->period, $this->manCode);

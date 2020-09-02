@@ -86,7 +86,13 @@ class StCommision extends Command
         年終獎金：
           -- ct = 70
           -- BCode = 1746
-        系統獎金：
+        續期佣金：
+          -- ct = 1
+          -- BCode = 500
+        繼續率獎金：
+          -- ct = 50
+          -- BCode = 2925, 2926, 5354
+        系統獎金(首佣)：
           -- ct = 1
           -- BCode = 499
         代數獎金：
@@ -97,7 +103,7 @@ class StCommision extends Command
         Mail::raw($content, function ($message) use ($zip_path) {
             $message->to(env("ST_COMMISSION_To"))
                 ->cc(env("ST_COMMISSION_CC"))
-                ->subject('st_佣金#此封調整排除產險的標準')
+                ->subject('st_佣金#此封增加續年佣金、繼續率獎金')
                 ->attach($zip_path);
         });
     }
