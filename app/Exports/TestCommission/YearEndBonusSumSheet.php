@@ -58,8 +58,8 @@ class YearEndBonusSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, F
             $this::getPeriod($table->direct_period, $table->or_period),
             $table->man_code,
             $table->man_name,
-            $table->year_end_bonus,
-            $table->or_year_end_bonus,
+            $table->direct_fyc,
+            $table->or_fyc,
         ];
     }
 

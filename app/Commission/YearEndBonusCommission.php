@@ -21,9 +21,9 @@ class YearEndBonusCommission
             'direct_period',
             'direct_fyb',
             'direct_fyrate',
-            'year_end_bonus',
+            'direct_fyc',
             'or_period',
-            'or_year_end_bonus'
+            'or_fyc'
         );
         
         if (!is_null($period)) {
