@@ -149,4 +149,32 @@ class RatioCommission
 
         return $description->get();
     }
+
+    public function recommendationDevelopRatio($manCode)
+    {
+        $description = $this->core
+        ->table('v_recommendation_develop_ratios')
+        ->select(
+            'man_code',
+            'man_name',
+            'man_rate',
+            'gd_code',
+            'gd_name',
+            'LV',
+            'gd_rate',
+            'gd_get_rate',
+            'mentor_gd_get_rate',
+            'recommendation_gdcode',
+            'recommendation_name',
+            'recommendation_gd_get_rate',
+            'need_to_change'
+        );
+
+        ### 目前驗證中：先全部開放
+        // if (!is_null($manCode)) {
+        //     $description->where('GDCode', $manCode);
+        // }
+
+        return $description->get();
+    }
 }

@@ -95,15 +95,22 @@ class StCommision extends Command
         系統獎金(首佣)：
           -- ct = 1
           -- BCode = 499
+        系統獎金(續佣)：
+          -- ct = 1
+          -- BCode = 599
         代數獎金：
           -- ct = 1
+          -- BCode = 499
+        推薦獎金：
+          -- ct = 1
           -- BCode = 499";
+
 
         $zip_path = $this->zip_path;
         Mail::raw($content, function ($message) use ($zip_path) {
             $message->to(env("ST_COMMISSION_To"))
                 ->cc(env("ST_COMMISSION_CC"))
-                ->subject('st_佣金#此封增加續年佣金、繼續率獎金')
+                ->subject('st_佣金#此封增加推薦獎金、系統獎金(續佣)')
                 ->attach($zip_path);
         });
     }
