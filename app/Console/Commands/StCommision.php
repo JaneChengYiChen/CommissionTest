@@ -44,8 +44,7 @@ class StCommision extends Command
         $this->period = ($this->option('period') == 'null')? null : $this->option('period');
         $this->mancode = ($this->option('mancode') == 'null')? null : $this->option('mancode');
         $this->periodrange = ($this->option('periodrange') == 'null')? null : $this->option('periodrange');
-        echo vaR_dump(!empty($this->periodrange));
-        exit;
+        
         $this->attachment();
         $this->mailing();
         $this->unlinkFilePath();
