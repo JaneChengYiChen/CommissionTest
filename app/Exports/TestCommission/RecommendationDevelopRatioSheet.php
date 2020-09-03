@@ -13,10 +13,11 @@ use App\Commission\RatioCommission;
 class RecommendationDevelopRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
-    public function __construct($period, $manCode)
+    public function __construct($period, $manCode, $periodRange)
     {
         $this->period = $period;
         $this->manCode = $manCode;
+        $this->periodRange = $periodRange;
     }
 
     public function collection()

@@ -11,7 +11,7 @@ class RecommendationCommission
         $this->core = CommissionDB::dbInit(CommissionDB::ST_CORE);
     }
 
-    public function sum($period, $manCode)
+    public function sum($period, $manCode, $periodRange)
     {
         $description = $this->core
         ->table('v_recommendation_commission')
@@ -32,10 +32,14 @@ class RecommendationCommission
             $description->where('man_code', $manCode);
         }
 
+        if (!is_null($periodRange)) {
+            $description->whereBetween('or_period', $periodRange);
+        }
+
         return $description->get();
     }
 
-    public function detail($period, $manCode)
+    public function detail($period, $manCode, $periodRange)
     {
         $description = $this->core
         ->table('v_recommendation_commission_details')
@@ -60,6 +64,10 @@ class RecommendationCommission
 
         if (!is_null($manCode)) {
             $description->where('gd_code', $manCode);
+        }
+
+        if (!is_null($periodRange)) {
+            $description->whereBetween('period', $periodRange);
         }
 
         return $description->get();

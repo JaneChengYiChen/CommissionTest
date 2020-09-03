@@ -13,16 +13,17 @@ use App\Commission\ContinuedCommission;
 class ContinuedDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
-    public function __construct($period, $manCode)
+    public function __construct($period, $manCode, $periodRange)
     {
         $this->period = $period;
         $this->manCode = $manCode;
+        $this->periodRange = $periodRange;
     }
 
     public function collection()
     {
         $QueryCollection = new ContinuedCommission;
-        $data = $QueryCollection->detail($this->period, $this->manCode);
+        $data = $QueryCollection->detail($this->period, $this->manCode, $this->periodRange);
         
         return $data;
     }

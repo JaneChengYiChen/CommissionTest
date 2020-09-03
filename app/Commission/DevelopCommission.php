@@ -11,7 +11,7 @@ class DevelopCommission
         $this->core = CommissionDB::dbInit(CommissionDB::ST_CORE);
     }
 
-    public function sum($period, $manCode)
+    public function sum($period, $manCode, $periodRange)
     {
         $description = $this->core
         ->table('v_develop_commissions')
@@ -29,6 +29,10 @@ class DevelopCommission
 
         if (!is_null($manCode)) {
             $description->where('man_code', $manCode);
+        }
+
+        if (!is_null($periodRange)) {
+            $description->whereBetween('period', $periodRange);
         }
 
         return $description->get();

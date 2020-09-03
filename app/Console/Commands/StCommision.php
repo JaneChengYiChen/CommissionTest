@@ -15,7 +15,7 @@ class StCommision extends Command
      *
      * @var string
      */
-    protected $signature = 'st:commission {--period=null} {--mancode=null}';
+    protected $signature = 'st:commission {--period=null} {--mancode=null} {--periodrange=*}';
 
     /**
      * The console command description.
@@ -43,6 +43,7 @@ class StCommision extends Command
     {
         $this->period = ($this->option('period') == 'null')? null : $this->option('period');
         $this->mancode = ($this->option('mancode') == 'null')? null : $this->option('mancode');
+        $this->periodrange = ($this->option('periodrange') == 'null')? null : $this->option('periodrange');
 
         $this->attachment();
         $this->mailing();
@@ -61,7 +62,7 @@ class StCommision extends Command
         $fileNameZip = "st_commission.zip";
 
         ini_set("memory_limit", -1);
-        Excel::store(new TestCommissionDataExport($this->period, $this->mancode), $fileName, 'tmp');
+        Excel::store(new TestCommissionDataExport($this->period, $this->mancode, $this->periodrange), $fileName, 'tmp');
         
         $this->pathToFile = "/tmp/" . $fileName;
         $this->zip_path = "/tmp/" . $fileNameZip;

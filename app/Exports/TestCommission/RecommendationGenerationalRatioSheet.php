@@ -18,10 +18,11 @@ class RecommendationGenerationalRatioSheet implements
     WithMapping
 {
 
-    public function __construct($period, $manCode)
+    public function __construct($period, $manCode, $periodRange)
     {
         $this->period = $period;
         $this->manCode = $manCode;
+        $this->periodRange = $periodRange;
     }
 
     public function collection()

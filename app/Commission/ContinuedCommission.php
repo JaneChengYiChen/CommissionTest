@@ -11,7 +11,7 @@ class ContinuedCommission
         $this->core = CommissionDB::dbInit(CommissionDB::ST_CORE);
     }
 
-    public function sum($period, $manCode)
+    public function sum($period, $manCode, $periodRange)
     {
         $description = $this->core
         ->table('v_continued_commissions')
@@ -37,10 +37,15 @@ class ContinuedCommission
             $description->where('man_code', $manCode);
         }
 
+        if (!is_null($periodRange)) {
+            $description->whereBetween('direct_period', $periodRange)
+                        ->orwhereBetween('or_period', $periodRange);
+        }
+
         return $description->get();
     }
 
-    public function detail($period, $manCode)
+    public function detail($period, $manCode, $periodRange)
     {
         $description = $this->core
         ->table('v_continued_commissions_details')
@@ -61,6 +66,10 @@ class ContinuedCommission
 
         if (!is_null($manCode)) {
             $description->where('gd_code', $manCode);
+        }
+
+        if (!is_null($periodRange)) {
+            $description->whereBetween('period', $periodRange);
         }
 
         return $description->get();

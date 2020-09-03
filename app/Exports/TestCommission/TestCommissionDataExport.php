@@ -39,10 +39,11 @@ class TestCommissionDataExport implements WithMultipleSheets
         'RecommendationDetailSheet' => "App\Exports\TestCommission\RecommendationDetailSheet",
     ];
 
-    public function __construct($period = null, $manCode = null)
+    public function __construct($period = null, $manCode = null, $periodrange = null)
     {
         $this->period = $period;
         $this->manCode = $manCode;
+        $this->periodrange = $periodrange;
     }
 
     /**
@@ -53,7 +54,7 @@ class TestCommissionDataExport implements WithMultipleSheets
         $sheets = [];
 
         foreach (self::$sheets as $sheetClass) {
-            $sheets[] = new $sheetClass($this->period, $this->manCode);
+            $sheets[] = new $sheetClass($this->period, $this->manCode, $this->periodrange);
         }
         return $sheets;
     }
