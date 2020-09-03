@@ -32,7 +32,7 @@ class RecommendationCommission
             $description->where('man_code', $manCode);
         }
 
-        if (!is_null($periodRange)) {
+        if (!empty($periodRange)) {
             $description->whereBetween('or_period', $periodRange);
         }
 
@@ -66,7 +66,7 @@ class RecommendationCommission
             $description->where('gd_code', $manCode);
         }
 
-        if (!is_null($periodRange)) {
+        if (!empty($periodRange)) {
             $description->whereBetween('period', $periodRange);
         }
 

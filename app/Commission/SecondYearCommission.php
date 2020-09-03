@@ -37,7 +37,7 @@ class SecondYearCommission
             $description->where('man_code', $manCode);
         }
 
-        if (!is_null($periodRange)) {
+        if (!empty($periodRange)) {
             $description->whereBetween('direct_period', $periodRange)
                         ->orwhereBetween('or_period', $periodRange);
         }
@@ -68,7 +68,7 @@ class SecondYearCommission
             $description->where('gd_code', $manCode);
         }
 
-        if (!is_null($periodRange)) {
+        if (!empty($periodRange)) {
             $description->whereBetween('period', $periodRange);
         }
 

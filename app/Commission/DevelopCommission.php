@@ -31,7 +31,7 @@ class DevelopCommission
             $description->where('man_code', $manCode);
         }
 
-        if (!is_null($periodRange)) {
+        if (!empty($periodRange)) {
             $description->whereBetween('period', $periodRange);
         }
 
