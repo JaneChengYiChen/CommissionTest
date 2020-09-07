@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\RatioCommission;
+use App\Commission\SystemContinuedCommission;
 
-class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class SystemContinuedDetailSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode, $periodRange)
@@ -22,8 +22,8 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
 
     public function collection()
     {
-        $QueryCollection = new RatioCommission;
-        $data = $QueryCollection->recommendationRatio($this->manCode);
+        $QueryCollection = new SystemContinuedCommission;
+        $data = $QueryCollection->detail($this->period, $this->manCode, $this->periodRange);
         
         return $data;
     }
@@ -32,14 +32,14 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
     {
         return [
             [
-                '原始人員編號',
-                '原始人員姓名',
-                '原始人員職級',
-                '上層人員編號',
-                '上層人員姓名',
-                '上幾層',
-                '上層人員職級',
-                '上層人員可從原始人員拿到%數'
+                '月份',
+                '領佣人編號',
+                '領佣人姓名',
+                '來源人員編號',
+                '來源人員姓名',
+                '來源佣金',
+                '領佣人可得比率',
+                '領佣人可得佣金'
             ],
         ];
     }
@@ -50,7 +50,7 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
      */
     public function title(): string
     {
-        return '推薦線關係圖(系統佣金-首佣,續佣)';
+        return '系統佣金明細(繼續率)';
     }
 
     /**
@@ -61,14 +61,14 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
     {
 
         return [
-            $table->man_code,
-            $table->man_name,
-            $table->man_title,
+            $table->period,
             $table->gd_code,
             $table->gd_name,
-            $table->LV,
-            $table->gd_title,
+            $table->sales_code,
+            $table->sales_name,
+            $table->fyb,
             $table->gd_get_rate,
+            $table->gd_gain_from_sales
         ];
     }
 }

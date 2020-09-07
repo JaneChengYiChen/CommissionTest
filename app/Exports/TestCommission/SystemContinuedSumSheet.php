@@ -8,9 +8,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Commission\CommissionDB;
-use App\Commission\RatioCommission;
+use App\Commission\SystemContinuedCommission;
 
-class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
+class SystemContinuedSumSheet implements WithTitle, WithHeadings, ShouldAutoSize, FromCollection, WithMapping
 {
 
     public function __construct($period, $manCode, $periodRange)
@@ -22,8 +22,8 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
 
     public function collection()
     {
-        $QueryCollection = new RatioCommission;
-        $data = $QueryCollection->recommendationRatio($this->manCode);
+        $QueryCollection = new SystemContinuedCommission;
+        $data = $QueryCollection->sum($this->period, $this->manCode, $this->periodRange);
         
         return $data;
     }
@@ -32,14 +32,11 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
     {
         return [
             [
-                '原始人員編號',
-                '原始人員姓名',
-                '原始人員職級',
-                '上層人員編號',
-                '上層人員姓名',
-                '上幾層',
-                '上層人員職級',
-                '上層人員可從原始人員拿到%數'
+                '月份',
+                '人員編號',
+                '人員姓名',
+                '直接佣金',
+                '組織佣金'
             ],
         ];
     }
@@ -50,7 +47,7 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
      */
     public function title(): string
     {
-        return '推薦線關係圖(系統佣金-首佣,續佣)';
+        return '系統佣金總和(繼續率)';
     }
 
     /**
@@ -61,14 +58,21 @@ class RecommendationRatioSheet implements WithTitle, WithHeadings, ShouldAutoSiz
     {
 
         return [
+            $this::getPeriod($table->direct_period, $table->or_period),
             $table->man_code,
             $table->man_name,
-            $table->man_title,
-            $table->gd_code,
-            $table->gd_name,
-            $table->LV,
-            $table->gd_title,
-            $table->gd_get_rate,
+            $table->direct_fyc,
+            $table->or_fyc,
         ];
+    }
+
+    private function getPeriod($direct_period, $or_period)
+    {
+        $period = $direct_period;
+        if (is_null($direct_period)) {
+            $period = $or_period;
+        }
+
+        return $period;
     }
 }
