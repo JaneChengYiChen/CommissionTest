@@ -59,7 +59,7 @@ class RecommendationSumSheet implements WithTitle, WithHeadings, ShouldAutoSize,
     {
 
         return [
-            $table->or_period,
+            $table->period,
             $table->man_code,
             $table->man_name,
             $table->mentoring_or_fyc,

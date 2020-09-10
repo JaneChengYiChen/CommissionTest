@@ -3,10 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Commission\FirstYearCommission;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TestCommission\TestCommissionDataExport;
 use Mail;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class StCommision extends Command
 {
@@ -29,6 +30,8 @@ class StCommision extends Command
      *
      * @return void
      */
+
+    protected $mailingChance = 3;
     public function __construct()
     {
         parent::__construct();
@@ -41,6 +44,7 @@ class StCommision extends Command
      */
     public function handle()
     {
+          
         $this->period = ($this->option('period') == 'null')? null : $this->option('period');
         $this->mancode = ($this->option('mancode') == 'null')? null : $this->option('mancode');
         $this->periodrange = ($this->option('periodrange') == 'null')? null : $this->option('periodrange');
@@ -111,21 +115,46 @@ class StCommision extends Command
 
 
         $zip_path = $this->zip_path;
-        Mail::raw($content, function ($message) use ($zip_path) {
-            $message->to(env("ST_COMMISSION_To"))
+        try {
+            Mail::raw($content, function ($message) use ($zip_path) {
+                $message->to(env("ST_COMMISSION_To"))
                 ->cc(env("ST_COMMISSION_CC"))
-                ->subject('st_佣金#此封增加系統獎金(繼續率)')
+                ->subject('st_佣金#此封將總和四捨五入到整數')
                 ->attach($zip_path);
-        });
+            });
+        } catch (\Exception $e) {
+            $this->chanceCounter($e);
+        }
+    }
+
+    private function chanceCounter($e)
+    {
+        if ($this->mailingChance === 0) {
+            return;
+        }
+
+        $this->log($e->getMessage());
+        $this->mailingChance = $this->mailingChance-1;
+        $this->mailing();
     }
 
     private function unlinkFilePath()
     {
-        if (file_exists($this->zip_path)) {
-            unlink($this->zip_path);
-        }
-        if (file_exists($this->pathToFile)) {
-            unlink($this->pathToFile);
-        }
+        File::delete($this->zip_path);
+        File::delete($this->pathToFile);
+    }
+
+    private function log($msg)
+    {
+        $today = date('Ymd');
+        $log_file_path = storage_path("logs/commission_{$today}.log");
+
+        $log_info = [
+            'date' => date('Y-m-d H:i:s'),
+            'msg' => $msg,
+        ];
+
+        $log_info_json = json_encode($log_info) . "\r\n";
+        File::append($log_file_path, $log_info_json);
     }
 }

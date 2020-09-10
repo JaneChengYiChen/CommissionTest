@@ -18,19 +18,15 @@ class SystemSecondYearCommission
         ->select(
             'man_code',
             'man_name',
-            'direct_period',
+            'period',
             'direct_fyb',
             'direct_fyrate',
             'direct_fyc',
-            'or_period',
             'or_fyc'
         );
         
         if (!is_null($period)) {
-            $description->Where(function ($query) use ($period) {
-                $query->where('direct_period', $period)
-                    ->Orwhere('or_period', $period);
-            });
+            $description->where('period', $period);
         }
 
         if (!is_null($manCode)) {
@@ -38,8 +34,7 @@ class SystemSecondYearCommission
         }
 
         if (!empty($periodRange)) {
-            $description->whereBetween('direct_period', $periodRange)
-                        ->orwhereBetween('or_period', $periodRange);
+            $description->whereBetween('period', $periodRange);
         }
 
         return $description->get();

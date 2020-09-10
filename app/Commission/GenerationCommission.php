@@ -19,11 +19,11 @@ class GenerationCommission
             'gd_code',
             'gd_name',
             'or_fyc',
-            'or_period'
+            'period'
         );
         
         if (!is_null($period)) {
-            $description->where('or_period', $period);
+            $description->where('period', $period);
         }
 
         if (!is_null($manCode)) {
@@ -31,7 +31,7 @@ class GenerationCommission
         }
 
         if (!empty($periodRange)) {
-            $description->whereBetween('or_period', $periodRange);
+            $description->whereBetween('period', $periodRange);
         }
 
         return $description->get();

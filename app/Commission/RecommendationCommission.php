@@ -18,14 +18,14 @@ class RecommendationCommission
         ->select(
             'man_code',
             'man_name',
-            'or_period',
+            'period',
             'mentoring_or_fyc',
             'recommending_or_fyc',
             'or_fyc'
         );
         
         if (!is_null($period)) {
-            $description->where('or_period', $period);
+            $description->where('period', $period);
         }
 
         if (!is_null($manCode)) {
@@ -33,7 +33,7 @@ class RecommendationCommission
         }
 
         if (!empty($periodRange)) {
-            $description->whereBetween('or_period', $periodRange);
+            $description->whereBetween('period', $periodRange);
         }
 
         return $description->get();
