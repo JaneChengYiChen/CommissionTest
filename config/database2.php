@@ -14,9 +14,8 @@ return [
     | you may use many connections at once using the Database library.
     |
     */
-
     'default' => env('DB_CONNECTION', 'leishanService'),
-    'testing' => env('DB_CONNECTION_TEST', 'leishanService'),
+    //'default' => env('DB_CONNECTION', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,34 +43,14 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        'leishanService' => [
+        'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_LEISHAN_SERVICE', '127.0.0.1'),
-            'port' => env('DB_PORT_LEISHAN_SERVICE', '3306'),
-            'database' => env('DB_DATABASE_LEISHAN_SERVICE', 'forge'),
-            'username' => env('DB_USERNAME_LEISHAN_SERVICE', 'forge'),
-            'password' => env('DB_PASSWORD_LEISHAN_SERVICE', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'leishanStService' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_LEISHAN_ST_SERVICE', '127.0.0.1'),
-            'port' => env('DB_PORT_LEISHAN_ST_SERVICE', '3306'),
-            'database' => env('DB_DATABASE_LEISHAN_ST_SERVICE', 'forge'),
-            'username' => env('DB_USERNAME_LEISHAN_ST_SERVICE', 'forge'),
-            'password' => env('DB_PASSWORD_LEISHAN_ST_SERVICE', ''),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -97,45 +76,6 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
-        ],
-
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-        ],
-
-        'sqlsrv_ls' => [
-            'driver' => 'sqlsrv',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_LS', 'localhost'),
-            'port' => env('DB_PORT_LS', '1433'),
-            'database' => env('DB_DATABASE_LS', 'forge'),
-            'username' => env('DB_USERNAME_LS', 'forge'),
-            'password' => env('DB_PASSWORD_LS', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-        ],
-
-        'testing' => [
-            'driver' => 'sqlsrv',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_TEST', 'localhost'),
-            'port' => env('DB_PORT_TEST', '1433'),
-            'database' => env('DB_DATABASE_TEST', 'forge'),
-            'username' => env('DB_USERNAME_TEST', 'forge'),
-            'password' => env('DB_PASSWORD_TEST', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
         ],
 
         'stPKS' => [
@@ -203,16 +143,16 @@ return [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => env('REDIS_DB', 0),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_DB', '0'),
         ],
 
         'cache' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
-            'database' => env('REDIS_CACHE_DB', 1),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_CACHE_DB', '1'),
         ],
 
     ],
