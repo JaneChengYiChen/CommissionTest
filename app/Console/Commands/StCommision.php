@@ -132,7 +132,7 @@ class StCommision extends Command
             Mail::raw($content, function ($message) use ($zip_path) {
                 $message->to(env("ST_COMMISSION_To"))
                 ->cc(env("ST_COMMISSION_CC"))
-                ->subject('st_佣金#此封調整年終%數')
+                ->subject('st_佣金#此封將佣金無條件捨去')
                 ->attach($zip_path);
             });
         } catch (\Exception $e) {
